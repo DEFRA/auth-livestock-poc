@@ -8,6 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 using AuthLivestockPoc.Config;
 using AuthLivestockPoc.Utils.Logging;
 using Serilog;
+using Amazon;
+//using Amazon.Extensions.NETCore.Setup;
+
 
 var app = CreateWebApplication(args);
 await app.RunAsync();
@@ -27,6 +30,7 @@ static WebApplication CreateWebApplication(string[] args)
 static void ConfigureBuilder(WebApplicationBuilder builder)
 {
     builder.Configuration.AddEnvironmentVariables();
+    //builder.Services.AddDefaultAWSOptions(new AWSOptions { Region =   RegionEndpoint.EUWest2 });
 
     // Load certificates into Trust Store - Note must happen before Mongo and Http client connections.
     builder.Services.AddCustomTrustStore();

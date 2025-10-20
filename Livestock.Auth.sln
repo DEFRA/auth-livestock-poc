@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthLivestockPoc", "AuthLivestockPoc\AuthLivestockPoc.csproj", "{7D935959-D3BE-4EDC-BAEC-541C72741633}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "src\Api\Api.csproj", "{7D935959-D3BE-4EDC-BAEC-541C72741633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthLivestockPoc.Test", "AuthLivestockPoc.Test\AuthLivestockPoc.Test.csproj", "{5CB86A4A-162D-4A20-9403-5BB89D671BF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit.Tests", "tests\Unit.Tests\Unit.Tests.csproj", "{5CB86A4A-162D-4A20-9403-5BB89D671BF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{70E466D8-DB47-42CC-BA2C-FD7CCA908191}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D37633C3-429C-4A25-9F3F-B199BE2DB55A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +28,9 @@ Global
 		{5CB86A4A-162D-4A20-9403-5BB89D671BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CB86A4A-162D-4A20-9403-5BB89D671BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CB86A4A-162D-4A20-9403-5BB89D671BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D935959-D3BE-4EDC-BAEC-541C72741633} = {70E466D8-DB47-42CC-BA2C-FD7CCA908191}
+		{5CB86A4A-162D-4A20-9403-5BB89D671BF6} = {D37633C3-429C-4A25-9F3F-B199BE2DB55A}
 	EndGlobalSection
 EndGlobal

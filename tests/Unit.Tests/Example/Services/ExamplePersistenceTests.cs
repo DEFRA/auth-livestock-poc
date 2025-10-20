@@ -5,8 +5,9 @@ using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
 using AuthLivestockPoc.Example.Models;
 using AuthLivestockPoc.Example.Services;
-using FluentAssertions;
+
 using MongoDB.Bson;
+using Shouldly;
 
 namespace AuthLivestockPoc.Test.Example.Services;
 
@@ -56,7 +57,7 @@ public class ExamplePersistenceTests
          Counter = 0
       };
       var result = await _persistence.CreateAsync(example);
-      result.Should().BeTrue();
+      result.ShouldBeTrue();
    }
 
    [Fact]
@@ -83,7 +84,7 @@ public class ExamplePersistenceTests
 
       var result = await persistence.CreateAsync(example);
 
-      result.Should().BeFalse();
+      result.ShouldBeFalse();
    }
 
 }

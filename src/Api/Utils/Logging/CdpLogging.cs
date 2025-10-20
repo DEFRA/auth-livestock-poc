@@ -15,7 +15,7 @@ public static class CdpLogging
 
         config
             .ReadFrom.Configuration(ctx.Configuration)
-            .Enrich.WithEcsHttpContext(httpAccessor!)
+            /*.Enrich.WithEcsHttpContext(httpAccessor!)*/
             .Enrich.FromLogContext()
             .Enrich.WithProperty("service.version", serviceVersion);
 
