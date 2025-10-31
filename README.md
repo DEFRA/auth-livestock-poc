@@ -1,6 +1,6 @@
 # auth-livestock-poc
 
-Core delivery C# ASP.NET backend template.
+POC Core delivery C# ASP.NET backend template.
 
 * [Install MongoDB](#install-mongodb)
 * [Inspect MongoDB](#inspect-mongodb)
