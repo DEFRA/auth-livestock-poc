@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
-namespace AuthLivestockPoc.Utils.Http;
+namespace Livestock.Auth.Utils.Http;
 
 public class ProxyHttpMessageHandler : HttpClientHandler
 {

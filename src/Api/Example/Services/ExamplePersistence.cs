@@ -1,9 +1,9 @@
-﻿using AuthLivestockPoc.Example.Models;
-using AuthLivestockPoc.Utils.Mongo;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System.Diagnostics.CodeAnalysis;
+using Livestock.Auth.Example.Models;
+using Livestock.Auth.Utils.Mongo;
 
-namespace AuthLivestockPoc.Example.Services;
+namespace Livestock.Auth.Example.Services;
 
 public interface IExamplePersistence
 {

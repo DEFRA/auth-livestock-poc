@@ -1,4 +1,4 @@
-namespace AuthLivestockPoc.Config;
+namespace Livestock.Auth.Config;
 
 public class MongoConfig
 {

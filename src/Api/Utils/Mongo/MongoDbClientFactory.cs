@@ -1,10 +1,10 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using System.Diagnostics.CodeAnalysis;
-using AuthLivestockPoc.Config;
+using Livestock.Auth.Config;
 using Microsoft.Extensions.Options;
 
-namespace AuthLivestockPoc.Utils.Mongo;
+namespace Livestock.Auth.Utils.Mongo;
 
 [ExcludeFromCodeCoverage]
 public class MongoDbClientFactory : IMongoDbClientFactory

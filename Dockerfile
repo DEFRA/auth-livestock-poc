@@ -13,16 +13,15 @@ RUN apt update && \
 
 # Build stage image
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /
 
 COPY . .
-WORKDIR "/src"
+WORKDIR "/"
 
-# unit test and code coverage
-RUN dotnet test AuthLivestockPoc.Test
+RUN dotnet test tests/Unit.Tests
 
 FROM build AS publish
-RUN dotnet publish AuthLivestockPoc -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish src/Api -c Release -o /app/publish /p:UseAppHost=false
 
 
 ENV ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
@@ -32,4 +31,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 EXPOSE 8085
-ENTRYPOINT ["dotnet", "AuthLivestockPoc.dll"]
+ENTRYPOINT ["dotnet", "Api.dll"]

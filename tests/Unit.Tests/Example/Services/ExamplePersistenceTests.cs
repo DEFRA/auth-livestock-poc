@@ -1,15 +1,14 @@
 using MongoDB.Driver;
-using AuthLivestockPoc.Utils.Mongo;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
-using AuthLivestockPoc.Example.Models;
-using AuthLivestockPoc.Example.Services;
-
+using Livestock.Auth.Example.Models;
+using Livestock.Auth.Example.Services;
+using Livestock.Auth.Utils.Mongo;
 using MongoDB.Bson;
 using Shouldly;
 
-namespace AuthLivestockPoc.Test.Example.Services;
+namespace Livestock.Auth.Test.Example.Services;
 
 public class ExamplePersistenceTests
 {

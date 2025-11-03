@@ -1,15 +1,13 @@
-using AuthLivestockPoc.Example.Endpoints;
-using AuthLivestockPoc.Example.Services;
-using AuthLivestockPoc.Utils;
-using AuthLivestockPoc.Utils.Http;
-using AuthLivestockPoc.Utils.Mongo;
+using Livestock.Auth.Example.Endpoints;
+using Livestock.Auth.Example.Services;
+using Livestock.Auth.Utils;
+using Livestock.Auth.Utils.Http;
+using Livestock.Auth.Utils.Mongo;
 using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
-using AuthLivestockPoc.Config;
-using AuthLivestockPoc.Utils.Logging;
+using Livestock.Auth.Config;
+using Livestock.Auth.Utils.Logging;
 using Serilog;
-using Amazon;
-//using Amazon.Extensions.NETCore.Setup;
 
 
 var app = CreateWebApplication(args);
@@ -32,8 +30,6 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
     builder.Configuration.AddEnvironmentVariables();
     //builder.Services.AddDefaultAWSOptions(new AWSOptions { Region =   RegionEndpoint.EUWest2 });
 
-    // Load certificates into Trust Store - Note must happen before Mongo and Http client connections.
-    builder.Services.AddCustomTrustStore();
     
     // Configure logging to use the CDP Platform standards.
     builder.Services.AddHttpContextAccessor();

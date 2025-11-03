@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AuthLivestockPoc.Utils;
+namespace Livestock.Auth.Utils;
 
 [ExcludeFromCodeCoverage]
 public static class TrustStore

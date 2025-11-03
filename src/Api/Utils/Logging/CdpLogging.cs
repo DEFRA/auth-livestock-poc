@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Elastic.CommonSchema.Serilog;
 using Serilog;
 
-namespace AuthLivestockPoc.Utils.Logging;
+namespace Livestock.Auth.Utils.Logging;
 
 public static class CdpLogging
 {

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Diagnostics.CodeAnalysis;
 
-namespace AuthLivestockPoc.Utils.Mongo;
+namespace Livestock.Auth.Utils.Mongo;
 
 [ExcludeFromCodeCoverage]
 public abstract class MongoService<T>

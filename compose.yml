@@ -40,6 +40,16 @@ services:
     volumes:
       - mongodb-data:/data
     restart: always
+  postgres:
+    image: postgres:14.3
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - cdp-tenant
 
   ################################################################################
 

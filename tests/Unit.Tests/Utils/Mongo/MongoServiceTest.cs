@@ -2,9 +2,9 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using NSubstitute;
 using Microsoft.Extensions.Logging.Abstractions;
-using AuthLivestockPoc.Utils.Mongo;
+using Livestock.Auth.Utils.Mongo;
 
-namespace AuthLivestockPoc.Test.Utils.Mongo
+namespace Livestock.Auth.Test.Utils.Mongo
 {
    public class MongoServiceTests
    {
