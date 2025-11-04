@@ -41,7 +41,7 @@ services:
       - mongodb-data:/data
     restart: always
   postgres:
-    image: postgres:14.3
+    image: postgres:16.6
     ports:
       - '5432:5432'
     environment:
