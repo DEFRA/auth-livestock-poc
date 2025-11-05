@@ -18,11 +18,26 @@ A local environment with:
 - Localstack for AWS services (S3, SQS)
 - Redis
 - MongoDB
+- Postgres
 - This service.
 - A commented out frontend example.
 
 ```bash
 docker compose up --build -d
+```
+
+### Local Environment
+
+Running liquibase migrations locally:
+
+### On Linux  
+
+``` bash
+### Install this version of 
+brew install liquibase
+
+ liquibase update --changelog-file ./changelog/db.changelog.xml --url jdbc:postgresql://localhost:5432/livestock_auth --log-level flag --username postgres --password postgres
+
 ```
 
 A more extensive setup is available in [github.com/DEFRA/cdp-local-environment](https://github.com/DEFRA/cdp-local-environment)

@@ -7,9 +7,7 @@
   <changeSet author="gwoodfine" id="1">
     <tagDatabase tag="v1.0.0" />
   </changeSet>
-  <changeSet author="gwoodfine" id="2">
-    <createTable tableName="users">
-      <column name="entra_id" type="uuid" autoIncrement="true" />
-    </createTable>
+  <changeSet author="gwoodfine" id="create_initial_database">
+    <sqlFile path="changelog/schema/defra_strategy_auth.sql"  />
   </changeSet>
 </databaseChangeLog>
