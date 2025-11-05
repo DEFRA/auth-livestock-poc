@@ -1,9 +1,9 @@
 create type cph_type as
-    (
+(
     county  varchar(2),
     parish  varchar(3),
     holding varchar(8)
-    );
+);
 
 alter type cph_type owner to postgres;
 create table users
