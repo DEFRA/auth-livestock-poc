@@ -26,17 +26,23 @@ A local environment with:
 docker compose up --build -d
 ```
 
-### Local Environment
+### PostgreSQL
+
+The database is configured to use PostgreSQL and to use Liquibase to manage migrations.
+
+Thew best way to run liquibase locally is to use Homebrew to install
+```shell
+brew install liquibase
+```
+
+Liquibase properties file in the root of the project defines all the properties that can be used to configure the database.
+
 
 Running liquibase migrations locally:
-
-### On Linux  
+ 
 
 ``` bash
-### Install this version of 
-brew install liquibase
-
- liquibase update --changelog-file ./changelog/db.changelog.xml --url jdbc:postgresql://localhost:5432/livestock_auth --log-level flag --username postgres --password postgres
+ liquibase update 
 
 ```
 

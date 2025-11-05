@@ -4,10 +4,10 @@
                    xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
-  <changeSet author="gwoodfine" id="1">
+  <changeSet author="gwoodfine" id="tag_initial_create">
     <tagDatabase tag="v1.0.0" />
   </changeSet>
   <changeSet author="gwoodfine" id="create_initial_database">
-    <sqlFile path="changelog/schema/defra_strategy_auth.sql"  />
+    <sqlFile path="database/schema/defra_strategy_auth.sql"  />
   </changeSet>
 </databaseChangeLog>

@@ -1,3 +1,4 @@
+-- custom type to contain the CPH reference
 create type cph_type as
 (
     county  varchar(2),
@@ -6,6 +7,8 @@ create type cph_type as
 );
 
 alter type cph_type owner to postgres;
+
+-- users table
 create table users
 (
     user_entra_id    uuid                     default gen_random_uuid() not null
@@ -26,6 +29,7 @@ create unique index users_email_address_active_uindex
 create index users_email_address_index
     on users (email_address);
 
+--- cphs table
 create table cphs
 (
     cph_id           uuid                     default gen_random_uuid() not null
@@ -43,6 +47,7 @@ alter table cphs
 create unique index pch_reference_is_active_uindex
     on cphs (reference, is_active);
 
+--- Mapping table between users and cphs
 create table user_cph_mapping
 (
     user_entra_id    uuid                                   not null
