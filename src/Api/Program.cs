@@ -6,6 +6,8 @@ using Livestock.Auth.Utils.Mongo;
 using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
 using Livestock.Auth.Config;
+using Livestock.Auth.Database;
+using Livestock.Auth.Example.Users;
 using Livestock.Auth.Utils.Logging;
 using Serilog;
 
@@ -60,12 +62,15 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
     // Set up the MongoDB client. Config and credentials are injected automatically at runtime.
     builder.Services.Configure<MongoConfig>(builder.Configuration.GetSection("Mongo"));
     builder.Services.AddSingleton<IMongoDbClientFactory, MongoDbClientFactory>();
+   
     
     builder.Services.AddHealthChecks();
     builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+    builder.Services.AddAuthDatabase(builder.Configuration);
     
     // Set up the endpoints and their dependencies
     builder.Services.AddSingleton<IExamplePersistence, ExamplePersistence>();
+    builder.Services.AddSingleton<IUserDataService, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
 }
 
 [ExcludeFromCodeCoverage]
@@ -74,9 +79,10 @@ static WebApplication SetupApplication(WebApplication app)
     app.UseHeaderPropagation();
     app.UseRouting();
     app.MapHealthChecks("/health");
-
+    app.UseAuthDatabase();
     // Example module, remove before deploying!
     app.UseExampleEndpoints();
+    app.UseUsersEndpoints();
 
     return app;
 }

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using System.Diagnostics.CodeAnalysis;
+using Livestock.Auth.Database;
 using Livestock.Auth.Example.Models;
 using Livestock.Auth.Example.Services;
 
@@ -41,6 +42,7 @@ public static class ExampleEndpoints
     private static async Task<IResult> GetAll(
         IExamplePersistence examplePersistence, string? searchTerm)
     {
+        
         if (searchTerm is not null && !string.IsNullOrWhiteSpace(searchTerm))
         {
             var matched = await examplePersistence.SearchByValueAsync(searchTerm);
