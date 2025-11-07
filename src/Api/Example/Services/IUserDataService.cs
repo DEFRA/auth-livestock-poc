@@ -13,6 +13,7 @@ public class UsersDataService(AuthContext context) : IUserDataService
 {
     async Task<List<User>> IUserDataService.GetAll()
     {
+        var query = await context.Set<User>().AsQueryable().ToListAsync();
         return await context.Set<User>().ToListAsync();
     }
 }

@@ -47,7 +47,7 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
     builder.Services
         .AddHttpClient("proxy")
         .ConfigurePrimaryHttpMessageHandler<ProxyHttpMessageHandler>();
-
+    builder.Services.AddAuthDatabase(builder.Configuration);
     // Propagate trace header.
     builder.Services.AddHeaderPropagation(options =>
     {
@@ -66,11 +66,11 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
     
     builder.Services.AddHealthChecks();
     builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-    builder.Services.AddAuthDatabase(builder.Configuration);
+   
     
     // Set up the endpoints and their dependencies
     builder.Services.AddSingleton<IExamplePersistence, ExamplePersistence>();
-    builder.Services.AddSingleton<IUserDataService, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
+    builder.Services.AddTransient<IUserDataService, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
 }
 
 [ExcludeFromCodeCoverage]
