@@ -5,9 +5,12 @@ using Livestock.Auth.Utils.Http;
 using Livestock.Auth.Utils.Mongo;
 using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
+using Livestock.Auth;
 using Livestock.Auth.Config;
 using Livestock.Auth.Database;
+using Livestock.Auth.Database.Entities;
 using Livestock.Auth.Endpoints.Users;
+using Livestock.Auth.Services;
 using Livestock.Auth.Utils.Logging;
 using Serilog;
 
@@ -70,7 +73,7 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
     
     // Set up the endpoints and their dependencies
    
-    builder.Services.AddTransient<IUserDataService, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
+    builder.Services.AddTransient<IDataService<User>, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
 }
 
 [ExcludeFromCodeCoverage]

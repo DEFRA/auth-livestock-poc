@@ -1,16 +1,25 @@
+using Livestock.Auth.Database.Entities;
+
 namespace Livestock.Auth.Endpoints.Users;
 
 public static class UsersEndpoints
 {
     public  static void UseUsersEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("users", GetAll);
+        app.MapGet(RouteNames.Users, GetAll);
+        app.MapGet(RouteNames.Users + "/{id}", Get);
     }
     private static async Task<IResult> GetAll(
-        IUserDataService service)
+        IDataService<User> service)
     {
-        
         var matches = await service.GetAll();
+        return Results.Ok(matches);
+    }
+    
+    private static async Task<IResult> Get(Guid id,
+        IDataService<User> service)
+    {
+        var matches = await service.Get(x => x.Id.Equals(id));
         return Results.Ok(matches);
     }
 }
