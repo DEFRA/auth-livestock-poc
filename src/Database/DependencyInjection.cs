@@ -9,14 +9,12 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddAuthDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        
+        var connectionString = configuration.GetConnectionString(Constants.ConnectionStringName);
         services
             .AddPooledDbContextFactory<AuthContext>((sp, options) =>
             {
-                
-                var connectionString = configuration.GetConnectionString("Auth");
                 var env = sp.GetRequiredService<IHostEnvironment>();
-                bool isProd = env.IsProduction();
+                var isProd = env.IsProduction();
                 options
                     .UseLoggerFactory(sp.GetRequiredService<ILoggerFactory>())
                     .UseNpgsql(
@@ -31,7 +29,7 @@ public static class DependencyInjection
                         })
                     .EnableSensitiveDataLogging(isProd);
             });
-        services.AddDbContext<AuthContext>(options => options.UseNpgsql(configuration.GetConnectionString("Auth")));
+        services.AddDbContext<AuthContext>(options => options.UseNpgsql(connectionString: connectionString));
         return services;
     }
 }
