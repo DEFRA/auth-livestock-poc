@@ -10,7 +10,7 @@ public class AuthContext(DbContextOptions<AuthContext> options): DbContext(optio
     {
        // modelBuilder.HasDefaultSchema(Constants.SchemaName);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        modelBuilder.HasPostgresExtension(PostgreExtensions.UUIDGenerator);
+        modelBuilder.HasPostgresExtension(PostgreExtensions.UuidGenerator);
        
     }
 }

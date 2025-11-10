@@ -23,4 +23,12 @@
   </ItemGroup>
 
 
+
+  <ItemGroup>
+    <Folder Include="Example\Services\" />
+    <Folder Include="Utils\Http\" />
+    <Folder Include="Utils\Mongo\" />
+  </ItemGroup>
+
+
 </Project>

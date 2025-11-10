@@ -1,11 +1,13 @@
-using MongoDB.Driver;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using NSubstitute;
+using System;
+using System.Threading.Tasks;
 using Livestock.Auth.Example.Models;
 using Livestock.Auth.Example.Services;
 using Livestock.Auth.Utils.Mongo;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using NSubstitute;
 using Shouldly;
 
 namespace Livestock.Auth.Test.Example.Services;
@@ -22,29 +24,29 @@ public class ExamplePersistenceTests
 
    public ExamplePersistenceTests()
    {
-      _collectionMock
+      this._collectionMock
             .CollectionNamespace
-            .Returns(_collectionNamespace);
-      _collectionMock
+            .Returns(this._collectionNamespace);
+      this._collectionMock
             .Database
-            .Returns(_databaseMock);
-      _databaseMock
+            .Returns(this._databaseMock);
+      this._databaseMock
          .DatabaseNamespace
          .Returns(new DatabaseNamespace("test"));
-      _conFactoryMock
+      this._conFactoryMock
          .GetClient()
          .Returns(Substitute.For<IMongoClient>());
-      _conFactoryMock
+      this._conFactoryMock
          .GetCollection<ExampleModel>("example")
-         .Returns(_collectionMock);
+         .Returns(this._collectionMock);
 
-      _persistence = new ExamplePersistence(_conFactoryMock, NullLoggerFactory.Instance);
+      this._persistence = new ExamplePersistence(this._conFactoryMock, NullLoggerFactory.Instance);
    }
 
    [Fact]
    public async Task CreateAsyncOk()
    {
-      _collectionMock
+      this._collectionMock
           .InsertOneAsync(Arg.Any<ExampleModel>())
           .Returns(Task.CompletedTask);
 
@@ -55,7 +57,7 @@ public class ExamplePersistenceTests
          Name = "Test",
          Counter = 0
       };
-      var result = await _persistence.CreateAsync(example);
+      var result = await this._persistence.CreateAsync(example);
       result.ShouldBeTrue();
    }
 
@@ -67,11 +69,11 @@ public class ExamplePersistenceTests
       var logMock = Substitute.For<ILogger<ExamplePersistence>>();
       loggerFactoryMock.CreateLogger<ExamplePersistence>().Returns(logMock);
 
-      _collectionMock
+      this._collectionMock
           .InsertOneAsync(Arg.Any<ExampleModel>())
           .Returns(Task.FromException<ExampleModel>(new Exception()));
 
-      var persistence = new ExamplePersistence(_conFactoryMock, loggerFactoryMock);
+      var persistence = new ExamplePersistence(this._conFactoryMock, loggerFactoryMock);
 
       var example = new ExampleModel()
       {
