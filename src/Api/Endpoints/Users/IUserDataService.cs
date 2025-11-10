@@ -2,7 +2,7 @@ using Livestock.Auth.Database;
 using Livestock.Auth.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Livestock.Auth.Example.Services;
+namespace Livestock.Auth.Endpoints.Users;
 
 public interface IUserDataService
 {

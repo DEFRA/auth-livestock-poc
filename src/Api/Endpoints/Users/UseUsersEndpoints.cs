@@ -1,6 +1,4 @@
-using Livestock.Auth.Example.Services;
-
-namespace Livestock.Auth.Example.Users;
+namespace Livestock.Auth.Endpoints.Users;
 
 public static class UsersEndpoints
 {

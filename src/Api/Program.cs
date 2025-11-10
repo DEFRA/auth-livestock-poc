@@ -7,7 +7,7 @@ using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
 using Livestock.Auth.Config;
 using Livestock.Auth.Database;
-using Livestock.Auth.Example.Users;
+using Livestock.Auth.Endpoints.Users;
 using Livestock.Auth.Utils.Logging;
 using Serilog;
 
@@ -69,7 +69,7 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
    
     
     // Set up the endpoints and their dependencies
-    builder.Services.AddSingleton<IExamplePersistence, ExamplePersistence>();
+   
     builder.Services.AddTransient<IUserDataService, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
 }
 
@@ -80,8 +80,6 @@ static WebApplication SetupApplication(WebApplication app)
     app.UseRouting();
     app.MapHealthChecks("/health");
     app.UseAuthDatabase();
-    // Example module, remove before deploying!
-    app.UseExampleEndpoints();
     app.UseUsersEndpoints();
 
     return app;
