@@ -8,7 +8,10 @@ namespace Livestock.Auth.Database;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddAuthDatabase(this IServiceCollection services, IConfiguration configuration)
+    private  const int MaxRetryCount = 5;
+    private const int MaxRetryDelay = 10;
+    private const int CommandTimeout = 60;
+    public static void AddAuthDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString(Constants.ConnectionStringName);
         services
@@ -23,15 +26,13 @@ public static class ServiceCollectionExtensions
                         npgsqlOptions =>
                         {
                             npgsqlOptions.EnableRetryOnFailure(
-                                maxRetryCount: 5,
-                                maxRetryDelay: TimeSpan.FromSeconds(10),
+                                maxRetryCount: MaxRetryCount,
+                                maxRetryDelay: TimeSpan.FromSeconds(MaxRetryDelay),
                                 errorCodesToAdd: null);
-                            npgsqlOptions.CommandTimeout(60);
+                            npgsqlOptions.CommandTimeout(CommandTimeout);
                         })
                     .EnableSensitiveDataLogging(isProd);
             });
-      
-        return services;
     }
     
     public static void UseAuthDatabase(this WebApplication app)
