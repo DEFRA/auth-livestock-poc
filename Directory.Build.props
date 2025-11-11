@@ -7,5 +7,11 @@
     <RootNamespace>Livestock.Auth</RootNamespace>
     <ProductName>Livestock.Auth</ProductName>
   </PropertyGroup>
+  
+  <!-- global packages -->
+  <ItemGroup>
+    <Using Include="Microsoft" />
+    <PackageReference Include="Microsoft.VisualStudio.Validation" />
+  </ItemGroup>
 </Project>
 

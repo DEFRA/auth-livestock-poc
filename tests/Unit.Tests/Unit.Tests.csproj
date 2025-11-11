@@ -1,34 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <Using Include="Xunit"/>
-  </ItemGroup>
-
-
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Api\Api.csproj" />
   </ItemGroup>
-
-
-
-  <ItemGroup>
-    <PackageReference Update="coverlet.collector">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Update="xunit.runner.visualstudio">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-
-
-  <ItemGroup>
-    <Folder Include="Example\Services\" />
-    <Folder Include="Utils\Http\" />
-    <Folder Include="Utils\Mongo\" />
-  </ItemGroup>
-
-
 </Project>

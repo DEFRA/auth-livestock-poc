@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using NSubstitute;
-using Shouldly;
+using FluentAssertions;
 
 namespace Livestock.Auth.Test.Example.Services;
 
@@ -47,7 +47,7 @@ public class ExamplePersistenceTests
    public async Task CreateAsyncOk()
    {
       this._collectionMock
-          .InsertOneAsync(Arg.Any<ExampleModel>())
+          .InsertOneAsync(Arg.Any<ExampleModel>(), cancellationToken: TestContext.Current.CancellationToken)
           .Returns(Task.CompletedTask);
 
       var example = new ExampleModel
@@ -58,7 +58,7 @@ public class ExamplePersistenceTests
          Counter = 0
       };
       var result = await this._persistence.CreateAsync(example);
-      result.ShouldBeTrue();
+      result.Should().BeTrue();
    }
 
    [Fact]
@@ -85,7 +85,7 @@ public class ExamplePersistenceTests
 
       var result = await persistence.CreateAsync(example);
 
-      result.ShouldBeFalse();
+      result.Should().BeFalse();
    }
 
 }
