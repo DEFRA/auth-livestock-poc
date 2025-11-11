@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -5,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Livestock.Auth.Database;
 
-public static class DependencyInjection
+public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddAuthDatabase(this IServiceCollection services, IConfiguration configuration)
     {
@@ -29,7 +30,17 @@ public static class DependencyInjection
                         })
                     .EnableSensitiveDataLogging(isProd);
             });
-        services.AddDbContext<AuthContext>(options => options.UseNpgsql(connectionString: connectionString));
+      
         return services;
+    }
+    
+    public static void UseAuthDatabase(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<AuthContext>>();
+        using var context = factory.CreateDbContext();
+        
+        if(context.Database.CanConnect()) 
+            context.Database.OpenConnection();
     }
 }

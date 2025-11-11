@@ -1,19 +1,15 @@
-using Livestock.Auth.Example.Endpoints;
-using Livestock.Auth.Example.Services;
-using Livestock.Auth.Utils;
-using Livestock.Auth.Utils.Http;
-using Livestock.Auth.Utils.Mongo;
-using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
+using FluentValidation;
 using Livestock.Auth;
 using Livestock.Auth.Config;
 using Livestock.Auth.Database;
 using Livestock.Auth.Database.Entities;
 using Livestock.Auth.Endpoints.Users;
 using Livestock.Auth.Services;
+using Livestock.Auth.Utils.Http;
 using Livestock.Auth.Utils.Logging;
+using Livestock.Auth.Utils.Mongo;
 using Serilog;
-
 
 var app = CreateWebApplication(args);
 await app.RunAsync();
@@ -33,13 +29,11 @@ static WebApplication CreateWebApplication(string[] args)
 static void ConfigureBuilder(WebApplicationBuilder builder)
 {
     builder.Configuration.AddEnvironmentVariables();
-    //builder.Services.AddDefaultAWSOptions(new AWSOptions { Region =   RegionEndpoint.EUWest2 });
-
-    
+  
     // Configure logging to use the CDP Platform standards.
     builder.Services.AddHttpContextAccessor();
     builder.Host.UseSerilog(CdpLogging.Configuration);
-    
+
     // Default HTTP Client
     builder.Services
         .AddHttpClient("DefaultClient")
@@ -60,20 +54,21 @@ static void ConfigureBuilder(WebApplicationBuilder builder)
             options.Headers.Add(traceHeader);
         }
     });
-    
-    
+
+
     // Set up the MongoDB client. Config and credentials are injected automatically at runtime.
     builder.Services.Configure<MongoConfig>(builder.Configuration.GetSection("Mongo"));
     builder.Services.AddSingleton<IMongoDbClientFactory, MongoDbClientFactory>();
-   
-    
+
+
     builder.Services.AddHealthChecks();
     builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-   
-    
+
+
     // Set up the endpoints and their dependencies
-   
-    builder.Services.AddTransient<IDataService<User>, UsersDataService>(service => new UsersDataService(service.GetRequiredService<AuthContext>()));
+
+    builder.Services.AddTransient<IDataService<User>, UsersDataService>(service =>
+        new UsersDataService(service.GetRequiredService<AuthContext>()));
 }
 
 [ExcludeFromCodeCoverage]

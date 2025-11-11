@@ -1,6 +1,6 @@
 namespace Livestock.Auth.Database.Entities;
 
-public class UserCph
+public class CountyParishHolding
 {
     
 }

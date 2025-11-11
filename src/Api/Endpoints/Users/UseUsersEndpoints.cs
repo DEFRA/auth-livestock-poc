@@ -7,7 +7,7 @@ public static class UsersEndpoints
     public  static void UseUsersEndpoints(this IEndpointRouteBuilder app)
     {
         app.MapGet(RouteNames.Users, GetAll);
-        app.MapGet(RouteNames.Users + "/{id}", Get);
+        app.MapGet(RouteNames.Users + "/{id:guid}", Get);
     }
     private static async Task<IResult> GetAll(
         IDataService<User> service)
