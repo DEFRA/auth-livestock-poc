@@ -12,8 +12,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
        builder.HasIndex(x => x.Id).IsUnique();
        
        builder.Property(x => x.Id)
-           .HasColumnName("user_entra_id")
+           .HasColumnName(nameof(User.Email).ToSnakeCase())
            .HasColumnType(ColumnTypes.UniqueIdentifier);
+
+       builder.Property(x => x.Email)
+           .HasColumnName("email_address")
+           .HasColumnType(ColumnTypes.Varchar)
+           .HasMaxLength(256);
        
        builder.Property(x => x.Created)
            .HasColumnName("created_datetime")
