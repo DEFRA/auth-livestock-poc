@@ -47,7 +47,7 @@ public class ExamplePersistenceTests
    public async Task CreateAsyncOk()
    {
       this._collectionMock
-          .InsertOneAsync(Arg.Any<ExampleModel>())
+          .InsertOneAsync(Arg.Any<ExampleModel>(), cancellationToken: TestContext.Current.CancellationToken)
           .Returns(Task.CompletedTask);
 
       var example = new ExampleModel
