@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
 
-namespace Livestock.Auth;
+namespace Livestock.Auth.Services;
 
-public interface IDataService<TEntity> where TEntity : class
+public interface IRepository<TEntity> where TEntity : class
 {
     Task<List<TEntity>> GetAll();
     Task<TEntity?> Get(Expression<Func<TEntity, bool>> predicate);

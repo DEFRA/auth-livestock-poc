@@ -3,7 +3,7 @@ namespace Livestock.Auth.Database;
 public static class ColumnTypes
 {
     public const string UniqueIdentifier = "uuid";
-    public const string Boolean = "boolean";
+   public const string Boolean = "boolean";
     public const string Varchar = "varchar";
     public const string Text = "text";
     public const string Date = "date";
@@ -19,4 +19,5 @@ public static class ColumnTypes
     public const string DateTimeOffSet = "timestamp with time zone";
     public const string Json = "json";
     public const string JsonB = "jsonb";
+    public const string CiText = "citext";
 }

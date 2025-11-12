@@ -1,9 +1,8 @@
 using FluentValidation.TestHelper;
 using Livestock.Auth.Example.Models;
-using Livestock.Auth.Example.Validators;
 using MongoDB.Bson;
 
-namespace Livestock.Auth.Test.Example.Validators;
+namespace Livestock.Auth.Example.Validators;
 
 public class ExampleValidatorTests
 {

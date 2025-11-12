@@ -1,9 +1,6 @@
-using Livestock.Auth.Api.Endpoints.Users;
-
-namespace Livestock.Auth;
-
 using System.Diagnostics.CodeAnalysis;
 using FluentValidation;
+using Livestock.Auth.Api.Endpoints.Users;
 using Livestock.Auth.Config;
 using Livestock.Auth.Database;
 using Livestock.Auth.Database.Entities;
@@ -13,6 +10,8 @@ using Livestock.Auth.Utils.Http;
 using Livestock.Auth.Utils.Logging;
 using Livestock.Auth.Utils.Mongo;
 using Serilog;
+
+namespace Livestock.Auth.Api;
 
 public class Program
 {
@@ -84,8 +83,8 @@ public class Program
 
         // Set up the endpoints and their dependencies
 
-        builder.Services.AddTransient<IDataService<User>, UsersDataService>(service =>
-            new UsersDataService(service.GetRequiredService<AuthContext>()));
+        builder.Services.AddTransient<IRepository<UserAccount>, UsersRepository>(service =>
+            new UsersRepository(service.GetRequiredService<AuthContext>()));
     }
 
     [ExcludeFromCodeCoverage]
