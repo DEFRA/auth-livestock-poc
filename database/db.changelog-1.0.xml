@@ -8,6 +8,6 @@
     <tagDatabase tag="v1.0.0" />
   </changeSet>
   <changeSet author="gwoodfine" id="create_initial_database">
-    <sqlFile path="database/schema/defra_strategy_auth.sql"  />
+    <sqlFile path="database/schema/initial.sql"  />
   </changeSet>
 </databaseChangeLog>

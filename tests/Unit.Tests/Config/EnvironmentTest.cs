@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
-using Environment = Livestock.Auth.Config.Environment;
 
-namespace Livestock.Auth.Test.Config;
+namespace Livestock.Auth.Config;
 
 public class EnvironmentTest
 {
