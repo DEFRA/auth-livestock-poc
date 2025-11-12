@@ -1,6 +1,6 @@
 using Livestock.Auth.Database.Entities;
 
-namespace Livestock.Auth.Endpoints.Users;
+namespace Livestock.Auth.Api.Endpoints.Users;
 
 public static class UsersEndpoints
 {

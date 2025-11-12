@@ -5,6 +5,9 @@
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
         <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" />
         <PackageReference Include="MongoDB.Driver" />
+        <PackageReference Include="Quartz" />
+        <PackageReference Include="Quartz.Extensions.DependencyInjection" />
+        <PackageReference Include="Quartz.Extensions.Hosting" />
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="Serilog.Enrichers.ClientInfo" />
         <PackageReference Include="Serilog.Enrichers.Environment" />

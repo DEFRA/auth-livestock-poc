@@ -2,9 +2,14 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
   <PropertyGroup>
     <RootNamespace>Livestock.Auth.Services</RootNamespace>
+    <AssemblyName>Livestock.Auth.Services</AssemblyName>
   </PropertyGroup>
  
   <ItemGroup>
     <Using Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Quartz" />
   </ItemGroup>
 </Project>
