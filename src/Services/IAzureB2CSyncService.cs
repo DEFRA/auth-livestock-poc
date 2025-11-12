@@ -2,7 +2,7 @@
 
 namespace Livestock.Auth.Services;
 
-public interface IKrdsService
+public interface IAzureB2CSyncService
     : IJob
 {
 }

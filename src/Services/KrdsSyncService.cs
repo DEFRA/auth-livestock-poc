@@ -8,7 +8,7 @@ namespace Livestock.Auth.Services;
 public class KrdsSyncService(
     ILogger<KrdsSyncService> logger,
     IOptions<KrdsSyncServiceConfiguration> options)
-    : IKrdsService
+    : IKrdsSyncService
 {
     public async Task Execute(IJobExecutionContext context)
     {

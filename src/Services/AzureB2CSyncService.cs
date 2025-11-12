@@ -8,7 +8,7 @@ namespace Livestock.Auth.Services;
 public class AzureB2CSyncService(
     ILogger<AzureB2CSyncService> logger,
     IOptions<AzureB2CSyncServiceConfiguration> options)
-    : IAzureB2CService
+    : IAzureB2CSyncService
 {
     public async Task Execute(IJobExecutionContext context)
     {

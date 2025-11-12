@@ -9,12 +9,6 @@ public static class QuartzServiceExtensions
 {
     public static IServiceCollection AddQuartzServices(this IServiceCollection sc, IConfigurationRoot config)
     {
-        sc.AddTransient<IKrdsService, KrdsSyncService>();
-        sc.AddTransient<IAzureB2CService, AzureB2CSyncService>();
-
-        sc.AddOptions<KrdsSyncServiceConfiguration>($"PolledServices:{nameof(KrdsSyncService)}");
-        sc.AddOptions<AzureB2CSyncServiceConfiguration>($"PolledServices:{nameof(AzureB2CSyncService)}");
-        
         var polledServices = config.GetSection("PolledServices");
         Requires.NotNull(polledServices);
 
@@ -22,8 +16,35 @@ public static class QuartzServiceExtensions
         {
             foreach (var serviceConfig in polledServices.GetChildren())
             {
-                var baseService = serviceConfig.Get<BasePollingServiceConfiguration>();
-                q.AddLocalJob(baseService, "PolledServices", serviceConfig.Key);
+                var baseConfig = serviceConfig.Get<BasePollingServiceConfiguration>();
+                Requires.NotNull(baseConfig);
+        
+                var serviceType = GetType(baseConfig.ServiceType);
+                var interfaceType = GetType(baseConfig.InterfaceType);
+                var configType = GetType(baseConfig.ConfigurationType);
+                
+                sc.AddTransient(interfaceType, serviceType);
+                var configureMethod = typeof(OptionsConfigurationServiceCollectionExtensions)
+                    .GetMethods()
+                    .First(m => m.Name == "Configure" 
+                                && m.GetParameters().Length == 2 
+                                && m.GetParameters()[1].ParameterType == typeof(IConfiguration))
+                    .MakeGenericMethod(configType);
+    
+                configureMethod.Invoke(null, [sc, serviceConfig]);
+                
+                var jobKey = new JobKey(serviceConfig.Key, "PolledServices");
+        
+                q.AddJob(serviceType, jobKey, j => j
+                    .WithDescription(baseConfig.Description)
+                );
+
+                q.AddTrigger(t => t
+                    .WithIdentity($"{serviceConfig.Key} Cron Trigger")
+                    .ForJob(jobKey)
+                    .StartNow()
+                    .WithCronSchedule(baseConfig.CronSchedule)
+                );
             }
         });
 
@@ -35,34 +56,19 @@ public static class QuartzServiceExtensions
         return sc;
     }
 
-    private static void AddLocalJob(
-        this IServiceCollectionQuartzConfigurator q,
-        BasePollingServiceConfiguration baseService,
-        string jobGroup,
-        string jobName)
+    private static Type GetType(string typeName)
     {
-        var jobKey = new JobKey(jobName, jobGroup);
-        
         var serviceType = AppDomain.CurrentDomain
             .GetAssemblies()
             .Where(asm => asm.FullName?.StartsWith("Livestock.Auth", StringComparison.OrdinalIgnoreCase) == true)
             .SelectMany(asm => asm.GetTypes())
-            .FirstOrDefault(t => string.Equals(t.FullName, baseService.Type, StringComparison.OrdinalIgnoreCase));
+            .FirstOrDefault(t => string.Equals(t.FullName, typeName, StringComparison.OrdinalIgnoreCase));
 
         if (serviceType == null)
         {
-            throw new InvalidOperationException($"Service type '{baseService.Type}' not found in Livestock.Auth assemblies");
+            throw new InvalidOperationException($"Type '{typeName}' not found");
         }
 
-        q.AddJob(serviceType, jobKey, j => j
-            .WithDescription(baseService.Description)
-        );
-
-        q.AddTrigger(t => t
-            .WithIdentity($"{jobName} Cron Trigger")
-            .ForJob(jobKey)
-            .StartNow()
-            .WithCronSchedule(baseService.CronSchedule)
-        );
+        return serviceType;
     }
 }
