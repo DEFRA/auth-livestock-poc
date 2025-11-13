@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Livestock.Auth.Database.Configuration;
 
-public class UserAccountConfiguration : BaseUpdateEntityConfiguration<UserAccount>
+internal class UserAccountConfiguration : BaseUpdateEntityConfiguration<UserAccount>
 {
     public override void Configure(EntityTypeBuilder<UserAccount> builder)
     {
@@ -18,8 +18,6 @@ public class UserAccountConfiguration : BaseUpdateEntityConfiguration<UserAccoun
            .HasColumnName(nameof(UserAccount.DisplayName).ToSnakeCase())
            .HasColumnType(ColumnTypes.Varchar)
            .HasMaxLength(256);
-       
-     
        
        builder.Property(x => x.AccountEnabled)
            .HasColumnName(nameof(UserAccount.AccountEnabled).ToSnakeCase())

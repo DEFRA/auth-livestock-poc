@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Livestock.Auth.Database.Configuration;
 
-public class KrdsSyncLogConfiguration : BaseProcessingEntityConfiguration<KrdsSyncLog>
+internal class KrdsSyncLogConfiguration : BaseProcessingEntityConfiguration<KrdsSyncLog>
 {
     public override void Configure(EntityTypeBuilder<KrdsSyncLog> builder)
     {

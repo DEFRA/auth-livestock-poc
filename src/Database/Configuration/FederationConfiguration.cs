@@ -13,13 +13,13 @@ internal class FederationConfiguration : BaseUpdateEntityConfiguration<Federatio
             .HasColumnName(nameof(Federation.UserAccountId).ToSnakeCase())
             .HasColumnType(ColumnTypes.UniqueIdentifier);
         
-        builder.Property(x => x.B2cTenant)
-            .HasColumnName(nameof(Federation.B2cTenant).ToSnakeCase())
+        builder.Property(x => x.TenantName)
+            .HasColumnName(nameof(Federation.TenantName).ToSnakeCase())
             .HasColumnType(ColumnTypes.Text)
             .IsRequired();
         
-        builder.Property(x => x.B2cObjectId)
-            .HasColumnName(nameof(Federation.B2cObjectId).ToSnakeCase())
+        builder.Property(x => x.ObjectId)
+            .HasColumnName(nameof(Federation.ObjectId).ToSnakeCase())
             .HasColumnType(ColumnTypes.UniqueIdentifier)
             
             .IsRequired();
@@ -46,7 +46,7 @@ internal class FederationConfiguration : BaseUpdateEntityConfiguration<Federatio
             .HasForeignKey(u => u.UserAccountId)
             .OnDelete(DeleteBehavior.NoAction);
         
-        builder.HasIndex(x => new{x.B2cObjectId, x.B2cTenant});
+        builder.HasIndex(x => new{ B2cObjectId = x.ObjectId, B2cTenant = x.TenantName});
         
         base.Configure(builder);
         

@@ -4,13 +4,13 @@ namespace Livestock.Auth.Database.Entities;
 
 public class Federation : BaseUpdateEntity
 {
-    public Guid UserAccountId { get; set; }
-    public UserAccount UserAccount { get; set; }
-    public string B2cTenant { get; set; }
-    public Guid B2cObjectId { get; set; }
-    public string TrustLevel { get; set; }
-    public string SyncStatus { get; set; }
-    public DateTime LastSyncedAt { get; set; }
+    public required Guid UserAccountId { get; set; }
+    public required UserAccount UserAccount { get; set; }
+    public required string TenantName { get; set; } 
+    public required Guid ObjectId { get; set; }
+    public required string TrustLevel { get; set; }
+    public required string SyncStatus { get; set; }
+    public required DateTime LastSyncedAt { get; set; }
 
     
 }

@@ -4,10 +4,11 @@ namespace Livestock.Auth.Database.Entities;
 
 public class Enrolment : BaseUpdateEntity
 {
-    public Guid B2cObjectId { get; set; }
+    public required Guid UserAccountId { get;  init; }
+    public UserAccount UserAccount { get; set; }
     public Guid ApplicationId { get; set; }
-    public string CphId { get; set; }
-    public string Role { get; set; }
+    public required string CphId { get; set; }
+    public required string Role { get; set; }
     public string Scope { get; set; }
     
     public string Status { get; set; }

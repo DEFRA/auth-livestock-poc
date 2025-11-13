@@ -10,5 +10,6 @@ public class UserAccount : BaseUpdateEntity
     public bool AccountEnabled { get; set; }
 
     public ICollection<Federation> Federations { get; set; }
+    public ICollection<Enrolment> Enrolments { get; set; }
  
 }

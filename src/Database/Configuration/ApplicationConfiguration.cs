@@ -10,15 +10,21 @@ internal class ApplicationConfiguration :BaseUpdateEntityConfiguration<Applicati
     {
         builder.Property(x => x.Name)
             .HasColumnName(nameof(Application.Name).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Text);
+            .HasColumnType(ColumnTypes.Text)
+            .HasComment("Human readable name for the application e.g Keeper Portal")
+            .IsRequired();
         
-        builder.Property(x => x.B2cClientId)
-            .HasColumnName(nameof(Application.B2cClientId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.UniqueIdentifier);
+        builder.Property(x => x.ClientId)
+            .HasColumnName(nameof(Application.ClientId).ToSnakeCase())
+            .HasColumnType(ColumnTypes.UniqueIdentifier)
+            .HasComment("Azure AD B2C application Client ID")
+            .IsRequired();
         
-        builder.Property(x => x. B2cTenant)
-            .HasColumnName(nameof(Application.B2cTenant).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Text);
+        builder.Property(x => x. TenantName)
+            .HasColumnName(nameof(Application.TenantName).ToSnakeCase())
+            .HasColumnType(ColumnTypes.Text)
+            .HasComment("Azure AD B2C tenant name e.g defra.onmicrosoft.com")
+            .IsRequired();
         
         builder.Property(x => x.Description)
             .HasColumnName(nameof(Application.Description).ToSnakeCase())
@@ -27,7 +33,9 @@ internal class ApplicationConfiguration :BaseUpdateEntityConfiguration<Applicati
         builder.Property(x => x.Status)
             .HasColumnName(nameof(Application.Status).ToSnakeCase())
             .HasColumnType(ColumnTypes.Text)
-            .HasDefaultValue("active");
+            .HasDefaultValue("active")
+            .HasComment("active/inactive/deprecated")
+            .IsRequired();
         
         base.Configure(builder);
     }

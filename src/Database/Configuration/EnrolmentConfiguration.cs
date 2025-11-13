@@ -8,19 +8,27 @@ internal class EnrolmentConfiguration : BaseUpdateEntityConfiguration<Enrolment>
 {
     public override void Configure(EntityTypeBuilder<Enrolment> builder)
     {
-        builder.HasIndex(x => new  {x.B2cObjectId, x.Role}).IsUnique();
+        builder.HasIndex(x => new  { B2cObjectId = x.UserAccountId, x.Role}).IsUnique();
         
-        builder.Property(x => x.B2cObjectId)
-            .HasColumnName(nameof(Enrolment.B2cObjectId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.UniqueIdentifier);
+        builder.Property(x => x.UserAccountId)
+            .HasColumnName(nameof(Enrolment.UserAccountId).ToSnakeCase())
+            .HasColumnType(ColumnTypes.UniqueIdentifier)
+            .IsRequired();
+        
+        builder.HasOne(u => u.UserAccount)
+            .WithMany(o => o.Enrolments)
+            .HasForeignKey(u => u.UserAccountId)
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.Property(x => x.ApplicationId)
             .HasColumnName(nameof(Enrolment.ApplicationId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.UniqueIdentifier);
+            .HasColumnType(ColumnTypes.UniqueIdentifier)
+            .IsRequired();
         
         builder.Property(x => x.CphId)
             .HasColumnName(nameof(Enrolment.CphId).ToSnakeCase())
-            .HasColumnType(ColumnTypes.Text);
+            .HasColumnType(ColumnTypes.Text)
+            .IsRequired();
         
         builder.Property(x => x.Role)
             .HasColumnName(nameof(Enrolment.Role).ToSnakeCase())
